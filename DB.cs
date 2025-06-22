@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using MySql.Data.MySqlClient;
 
 namespace LoginFormPractical
@@ -17,6 +18,31 @@ namespace LoginFormPractical
                 cmd.Parameters.AddWithValue("@username", username);
                 cmd.Parameters.AddWithValue("@password", password);
                 return (long)cmd.ExecuteScalar() > 0;
+            }
+        }
+
+        public bool CheckUsernameExists(string username)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "SELECT COUNT(*) FROM users WHERE username=@username";
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@username", username);
+                return Convert.ToInt64(cmd.ExecuteScalar()) > 0;
+            }
+        }
+
+        public bool RegisterUser(string username, string password)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "INSERT INTO users (username, password) VALUES (@username, @password)";
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@password", password);
+                return cmd.ExecuteNonQuery() > 0;
             }
         }
     }

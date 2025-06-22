@@ -49,5 +49,13 @@ namespace LoginFormPractical
         {
             Application.Exit();
         }
+
+        private void lnkToRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            RegistrationForm regForm = new RegistrationForm();
+            regForm.FormClosed += (s, args) => this.Show();
+            this.Hide();
+            regForm.Show();
+        }
     }
 }
