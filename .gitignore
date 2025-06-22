@@ -1,0 +1,19 @@
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+
+# VS settings folder
+.vs/
+
+# Backup & log files
+*.log
+*.tmp
+
+# Others
+*.cache
+*.dbmdl
+*.pdb
