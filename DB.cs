@@ -1,5 +1,4 @@
-﻿using System.Data;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 
 namespace LoginFormPractical
 {
@@ -10,12 +9,12 @@ namespace LoginFormPractical
         public bool ValidateUser(string username, string password)
         {
             using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM users WHERE username=@username AND password=@password", connection))
             {
-                connection.Open();
-                string query = "SELECT COUNT(*) FROM users WHERE username=@username AND password=@password";
-                MySqlCommand cmd = new MySqlCommand(query, connection);
                 cmd.Parameters.AddWithValue("@username", username);
                 cmd.Parameters.AddWithValue("@password", password);
+
+                connection.Open();
                 return (long)cmd.ExecuteScalar() > 0;
             }
         }

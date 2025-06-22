@@ -5,30 +5,28 @@ namespace LoginFormPractical
 {
     public partial class Form1 : Form
     {
-        private readonly DB database;
+        private readonly DB db;
 
         public Form1()
         {
             InitializeComponent();
-            database = new DB();
+            db = new DB();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string username = txtUsername.Text;
-            string password = txtPassword.Text;
+            string user = txtUsername.Text;
+            string pass = txtPassword.Text;
 
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(pass))
             {
-                MessageBox.Show("Please enter both username and password.", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Enter both username and password.", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             try
             {
-                bool isValidUser = database.ValidateUser(username, password);
-
-                if (isValidUser)
+                if (db.ValidateUser(user, pass))
                 {
                     MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txtUsername.Clear();
