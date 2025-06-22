@@ -11,6 +11,7 @@ namespace LoginFormPractical
         {
             InitializeComponent();
             database = new DB();
+            lnkToRegister.LinkClicked += lnkToRegister_LinkClicked;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -53,9 +54,10 @@ namespace LoginFormPractical
         private void lnkToRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             RegistrationForm regForm = new RegistrationForm();
-            regForm.FormClosed += (s, args) => this.Show();
-            this.Hide();
-            regForm.Show();
+            this.Hide(); // Hide login form
+            regForm.ShowDialog(); // Show registration as modal
+            this.Show(); // Show login form again when registration closes
         }
+
     }
 }

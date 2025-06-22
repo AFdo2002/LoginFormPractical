@@ -13,6 +13,7 @@ namespace LoginFormPractical
     public partial class RegistrationForm : Form
     {
         private readonly DB database = new DB();
+        
 
         public RegistrationForm()
         {
@@ -28,6 +29,9 @@ namespace LoginFormPractical
             textBox2.PasswordChar = '•';
             textBox3.PasswordChar = '•';
         }
+
+        // Store reference to login form
+        
 
         private void button1_Click(object sender, EventArgs e) // Register button
         {
@@ -74,7 +78,9 @@ namespace LoginFormPractical
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.Close();
+            this.DialogResult = DialogResult.Cancel; // This will close the form
         }
+
+      
     }
 }
